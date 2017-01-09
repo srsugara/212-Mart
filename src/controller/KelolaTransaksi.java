@@ -5,6 +5,7 @@
  */
 package controller;
 
+import com.sun.org.apache.xerces.internal.util.XMLChar;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -117,6 +118,9 @@ public class KelolaTransaksi {
     }
     
     public void ubahPesanan(int idPesan,String id, int jumlah, int total) {
+        if(id==null || idPesan<=0 || jumlah<=0 || total<0){
+            JOptionPane.showMessageDialog(null, "Parameter method ubahPesanan() tidak valid");
+        }
         Connection con = KoneksiDB.connectDB();
         try {
             Statement st = con.createStatement();
@@ -128,6 +132,10 @@ public class KelolaTransaksi {
     }
     
     public int getCountPesan(String id,int idPesan) throws SQLException {
+        if(id==null || idPesan<=0){
+            JOptionPane.showMessageDialog(null, "Parameter method getCountPesanan() tidak valid");
+        }
+        
         Connection con = KoneksiDB.connectDB();
         Statement st = con.createStatement();
         ResultSet rs = st.executeQuery("SELECT * FROM pesan_barang "
