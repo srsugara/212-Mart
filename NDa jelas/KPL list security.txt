@@ -1,0 +1,10 @@
+list secure code
+1. not reuse name of standard library(v) (sudah)
+2. not use equality operators when comparing values (isEmpty)(v) 
+3. try catch(v) 
+4. menggunakan "Final" pada Security check()login (x)
+5. prevent sql injection (menggunakan fungsi yang ada di PreparedStatement)(v)
+6. Limit Accessibility of Fields (pembatasan banyaknya karakter/modul 2)
+7. not ignore values returned by methods
+8. not use the Object.equals() method to compare two arrays
+9. 
