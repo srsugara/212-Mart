@@ -6,12 +6,8 @@
 package view;
 
 import controller.CekLogin;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import org.jdesktop.xswingx.PromptSupport;
+import org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper;
 
 /**
  *
@@ -138,12 +134,7 @@ public class LoginForm extends javax.swing.JFrame {
         String user=usernameText.getText();
         String pass=passwordText.getText();
         CekLogin l = new CekLogin();
-        try {
-            l.login(user, pass);
-        }
-        catch(SQLException ex){
-            Logger.getLogger(MenuUtamaForm.class.getName()).log(Level.SEVERE, null, ex);
-        }     
+        l.login(user, pass);     
 
     }//GEN-LAST:event_masukButtonActionPerformed
 
@@ -175,7 +166,16 @@ public class LoginForm extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
 
-        /* Create and display the form */
+        try 
+        {
+            BeautyEyeLNFHelper.frameBorderStyle=BeautyEyeLNFHelper.FrameBorderStyle.osLookAndFeelDecorated;
+            org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+        } 
+        catch (Exception e) 
+        {
+          e.printStackTrace();
+        }
+        
         java.awt.EventQueue.invokeLater(() -> {
             new LoginForm().setVisible(true);
         });

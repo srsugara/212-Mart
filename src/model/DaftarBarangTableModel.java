@@ -40,12 +40,12 @@ public class DaftarBarangTableModel extends AbstractTableModel {
     
     
     @Override
-    public int getRowCount() {
+    public final int getRowCount() {
         return brgList.size();
     }
 
     @Override
-    public int getColumnCount() {
+    public final int getColumnCount() {
         return header.length;
     }
 
@@ -70,5 +70,4 @@ public class DaftarBarangTableModel extends AbstractTableModel {
     public String getColumnName(int column){
         return header[column];
     }
-    
 }

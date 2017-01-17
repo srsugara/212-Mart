@@ -225,16 +225,16 @@ public class PembayaranForm extends javax.swing.JDialog {
         try {
             String nama = barangCombo.getSelectedItem().toString();
             String jum = jumlahText.getText();
-            int i = dbKT.getMaxId() + 1;
+            int i=Math.addExact(dbKT.getMaxId(), 1);
             if (!jum.isEmpty()) { // melakukan pengecekan inputan
                 if (jum.matches("[0-9]*") && Integer.parseInt(jum)>0) {
 
-                    listBrg = dbKB.getListBarang(nama);
+                    listBrg = dbKB.getListBarang(null,nama);
                     for (Barang barangs : listBrg) {
                         pes.setNo(i);
                         pes.setIdBarang(barangs.getId());
                         pes.setJumlah(Integer.parseInt(jum));
-                        int total = pes.getJumlah() * barangs.getHarga();
+                        int total=Math.multiplyExact(pes.getJumlah(), barangs.getHarga());
                         pes.setTotalHarga(total);
                         if(dbKB.getStok(pes.getIdBarang())>=pes.getJumlah()){
                             if (dbKT.getCountPesan(pes.getIdBarang(), pes.getIdPesan()) == 0) {                          

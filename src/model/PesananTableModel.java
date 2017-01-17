@@ -18,6 +18,9 @@ public class PesananTableModel extends AbstractTableModel {
     public PesananTableModel(List<Pesanan> pesanList) {
         this.pesanList = pesanList;
     }
+    public PesananTableModel() {
+        
+    }
     
     private String[] header={"Kode","Nama","Harga Satuan","Jumlah","Total"};
 

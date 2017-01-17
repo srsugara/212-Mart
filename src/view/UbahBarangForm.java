@@ -25,8 +25,9 @@ public class UbahBarangForm extends javax.swing.JDialog {
     public String idLama;
 
     public UbahBarangForm(java.awt.Dialog parent, boolean modal) {
-        super(parent, modal);
+        super(parent, modal);    
         initComponents();
+        kodeText.disable();
     }
 
     /**
@@ -195,7 +196,9 @@ public class UbahBarangForm extends javax.swing.JDialog {
                         barang.setHarga(Integer.parseInt(harga));
                         barang.setStok(Integer.parseInt(stok));
                         if (idLama.equals(kode)) {
+                            
                             dbKB.ubahBarang(idLama, barang.getId(), barang.getNama(), barang.getHarga(), barang.getStok());
+                            
                             DaftarBarangForm daftarBarang = new DaftarBarangForm(this, true);
                             this.dispose();
                             daftarBarang.setVisible(true);

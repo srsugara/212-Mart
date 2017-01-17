@@ -22,7 +22,7 @@ public class DaftarBarangForm extends javax.swing.JDialog {
      * Creates new form DaftarBarangForm
      */
     private final DaftarBarangTableModel brgTableModel;
-    private final List<Barang> brgList;
+    private List<Barang> brgList;
     private final KelolaBarang dbKB = new KelolaBarang();
 
     public DaftarBarangForm(java.awt.Frame parent, boolean modal) throws SQLException {
@@ -50,7 +50,7 @@ public class DaftarBarangForm extends javax.swing.JDialog {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        cariText = new javax.swing.JTextField();
         barangTabel = new javax.swing.JScrollPane();
         barangTable = new javax.swing.JTable();
         tambah = new javax.swing.JButton();
@@ -85,10 +85,10 @@ public class DaftarBarangForm extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        cariText.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        cariText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                cariTextActionPerformed(evt);
             }
         });
 
@@ -155,7 +155,7 @@ public class DaftarBarangForm extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(barangTabel, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cariText, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cari, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -170,7 +170,7 @@ public class DaftarBarangForm extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tambah, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cari, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
+                    .addComponent(cariText))
                 .addGap(18, 18, 18)
                 .addComponent(barangTabel, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -180,18 +180,26 @@ public class DaftarBarangForm extends javax.swing.JDialog {
                 .addGap(0, 27, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cari, jTextField1});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cari, cariText});
 
         setSize(new java.awt.Dimension(434, 457));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void cariTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariTextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        
+    }//GEN-LAST:event_cariTextActionPerformed
 
     private void cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariActionPerformed
         // TODO add your handling code here:
+        try {
+            brgList = dbKB.getListBarang(cariText.getText(), null);
+            brgTableModel.setBrgList(brgList);
+            brgTableModel.fireTableDataChanged();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_cariActionPerformed
 
     private void menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuMouseClicked
@@ -259,11 +267,11 @@ public class DaftarBarangForm extends javax.swing.JDialog {
     private javax.swing.JScrollPane barangTabel;
     private javax.swing.JTable barangTable;
     private javax.swing.JButton cari;
+    private javax.swing.JTextField cariText;
     private javax.swing.JButton hapus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JMenu menu;
     private javax.swing.JButton tambah;
     private javax.swing.JButton ubah;

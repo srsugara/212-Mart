@@ -5,6 +5,7 @@
  */
 package model;
 
+
 /**
  *
  * @author Syauqi Rahmat Sugara
@@ -12,7 +13,7 @@ package model;
 public class Barang {
     String id,nama;
     int harga,stok;
-
+    
     public Barang() {
     }
 

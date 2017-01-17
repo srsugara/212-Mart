@@ -7,6 +7,8 @@ package view;
 
 import controller.KelolaBarang;
 import java.sql.SQLException;
+import java.text.Normalizer;
+import java.text.Normalizer.Form;
 import javax.swing.JOptionPane;
 import model.Barang;
 
@@ -181,7 +183,10 @@ public class TambahBarangForm extends javax.swing.JDialog {
             String nama = namaText.getText();
             String harga = hargaText.getText();
             String stok = stokText.getText();
-
+            kode=Normalizer.normalize(kode, Form.NFKC);
+            nama=Normalizer.normalize(nama, Form.NFKC);
+            harga=Normalizer.normalize(harga, Form.NFKC);
+            stok=Normalizer.normalize(stok, Form.NFKC);
             if (!kode.isEmpty() && !nama.isEmpty() && !harga.isEmpty() && !stok.isEmpty()) { // melakukan pengecekan inputan
                 if (harga.matches("[0-9]*") && stok.matches("[0-9]*")) {
                     if ( dbKB.getCountBarang(kode)==0) {

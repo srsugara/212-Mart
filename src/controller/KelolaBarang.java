@@ -45,13 +45,18 @@ public class KelolaBarang {
         return brgList;
     }
 
-    public List<Barang> getListBarang(String nama) throws SQLException {
-        List<Barang> brgList;
+    public List<Barang> getListBarang(String cari,String nama) throws SQLException {
+        List<Barang> brgList = new ArrayList<>();
         Connection con = KoneksiDB.connectDB();
         try {
             Statement stat = con.createStatement();
-            ResultSet rs = stat.executeQuery("SELECT * FROM barang where nama_barang='" + nama + "'");
-            brgList = new ArrayList<>();
+            ResultSet rs = null;
+            if(cari==null){
+                rs = stat.executeQuery("SELECT * FROM barang where nama_barang='" + nama + "'");
+            }else if(nama==null){
+                rs = stat.executeQuery("SELECT * FROM barang where id_barang LIKE '%"+cari+"%' OR nama_barang LIKE '%"+cari+"%' OR stok LIKE '%"+cari+"%' OR harga LIKE '%"+cari+"%'");
+            }   
+           
             while (rs.next()) {
                 Barang brg = new Barang();
                 brg.setId(rs.getString("id_barang"));
@@ -161,6 +166,7 @@ public class KelolaBarang {
                 query="UPDATE barang SET stok=stok+" + jumlah + " WHERE id_barang='" + id + "'";
             }
             st.executeUpdate(query);
+            
         } 
         catch (SQLException e) {
             System.err.println(e.getMessage());
